@@ -1,16 +1,18 @@
-import React from 'react'
-import { RegisterBody } from '../registration/styles'
-import {AuthBtn} from './styles'
+import React from 'react';
+import { AuthBtn } from './styles';
 
-const AuthButton = ({text}) => {
-	const sendData = () => {
-		const {name, email, password} = RegisterBody
-	};
-	return (
-		<AuthBtn type="submit" onClick={sendData}>
-			{text}
-		</AuthBtn>
-	)
-}
+const AuthButton = ({ text, registration, registerBody }) => {
+  const sendData = (event) => {
+    event.preventDefault();
+    const { name, email, password } = registerBody;
+    registration(name, email, password);
+  };
 
-export default AuthButton
+  return (
+    <AuthBtn type='submit' onClick={(event) => sendData(event)}>
+      {text}
+    </AuthBtn>
+  );
+};
+
+export default AuthButton;
