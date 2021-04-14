@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import Header from './components/header';
 import Login from './components/login';
 import Registration from './components/registration';
@@ -8,16 +8,15 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { auth } from './actions/userAction';
 
-
 function App() {
   const isAuth = useSelector((state) => state.user.isAuth);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   React.useEffect(() => {
-    dispatch(auth())
-  }, [])
+    dispatch(auth());
+  }, []);
   return (
-    <div className="container">
+    <div className='container'>
       <AppGlobalStyles />
       <Header />
       {!isAuth ? (

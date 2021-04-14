@@ -5,7 +5,6 @@ export const AppGlobalStyles = createGlobalStyle`
 		max-width: 1140px;
 		margin: 0 auto;
 	}
-	
 	input,button { 
 		outline: none;
 		border: none;

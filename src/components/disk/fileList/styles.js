@@ -10,14 +10,16 @@ export const FileListHeader = styled.div`
 `;
 
 export const FileListName = styled.div`
-  grid-column-start: 1;  
-`
+  grid-column-start: 2;
+  
+`;
 
 export const FileListDate = styled.div`
-  grid-column-start: 5;  
-`
+  grid-column-start: 5;
+  justify-self: center;
+`;
 
 export const FileListSize = styled.div`
-  grid-column-start: 6;  
-  justify-self: flex-end;
-`
+  grid-column-start: 6;
+  justify-self: center;
+`;
