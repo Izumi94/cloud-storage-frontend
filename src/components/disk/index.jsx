@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getFiles } from '../../actions/file';
-import { DiskWrapper, BtnsWrapper, BtnCreate } from './styles';
+import { DiskWrapper, BtnsWrapper, BtnCreate, DiskUploadInput, DiskUploadLabel } from './styles';
 import { setCurrentDir } from '../../reducers/fileReducer';
 import FileList from './fileList/fileList';
 import Popup from './popup';
@@ -29,6 +29,12 @@ const Disk = () => {
           Назад
         </button>
         <BtnCreate onClick={() => setActivePopup(true)}>Создать папку</BtnCreate>
+        <div className="disk__upload">
+          <DiskUploadLabel htmlFor="upload-input" className="disk__upload-label">
+            Upload file
+          </DiskUploadLabel>
+          <DiskUploadInput id="upload-input" type="file"/>
+        </div>
       </BtnsWrapper>
       <FileList />
       <Popup setActivePopup={setActivePopup} activePopup={activePopup} currentDir={currentDir} />
