@@ -18,6 +18,8 @@ const Disk = () => {
   const [activePopup, setActivePopup] = React.useState(false);
   const [dragEnter, setDragEnter] = React.useState(false);
 
+  const popupRef = React.useRef();
+
   const currentDir = useSelector((state) => state.files.currentDir);
   const dirStack = useSelector((state) => state.files.dirStack);
 
@@ -33,30 +35,31 @@ const Disk = () => {
   const fileUploadHandler = (event) => {
     const files = [...event.target.files];
 
-    files.forEach((file) => dispatch(uploadFile(file)));
+    files.forEach((file) => dispatch(uploadFile(file, currentDir)));
+  };
+
+  const stopTarget = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
   };
 
   const dragEnterHandler = (event) => {
-    event.preventDefault();
-    event.stopPropagation();
+    stopTarget(event);
     setDragEnter(true);
   };
 
   const dragOverHandler = (event) => {
-    event.preventDefault();
-    event.stopPropagation();
+    stopTarget(event);
     setDragEnter(true);
   };
 
   const dragLeaveHandler = (event) => {
-    event.preventDefault();
-    event.stopPropagation();
+    stopTarget(event);
     setDragEnter(false);
   };
 
   const dropHandler = (event) => {
-    event.preventDefault();
-    event.stopPropagation();
+    stopTarget(event);
     const files = [...event.dataTransfer.files];
     files.forEach((file) => dispatch(uploadFile(file)));
     setDragEnter(false);
@@ -83,7 +86,14 @@ const Disk = () => {
         </div>
       </BtnsWrapper>
       <FileList />
-      <Popup setActivePopup={setActivePopup} activePopup={activePopup} currentDir={currentDir} />
+      {activePopup && (
+        <Popup
+          popupRef={popupRef}
+          setActivePopup={setActivePopup}
+          activePopup={activePopup}
+          currentDir={currentDir}
+        />
+      )}
     </DiskWrapper>
   ) : (
     <DragEnter

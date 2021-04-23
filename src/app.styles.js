@@ -1,4 +1,4 @@
-import {createGlobalStyle } from 'styled-components'
+import { createGlobalStyle } from 'styled-components';
 
 export const AppGlobalStyles = createGlobalStyle`
 	.container {
@@ -9,7 +9,6 @@ export const AppGlobalStyles = createGlobalStyle`
 		outline: none;
 		border: none;
 	}
-
 	button {
 		cursor: pointer;
 	}
@@ -25,4 +24,4 @@ export const AppGlobalStyles = createGlobalStyle`
 		color: #566885;
 	}
 	body	{font-family: 'Roboto', 'Segoe UI', Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif}
-`
+`;
