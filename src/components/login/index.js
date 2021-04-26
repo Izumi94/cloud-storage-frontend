@@ -1,3 +1,4 @@
+
 import React from 'react';
 import Input from '../input';
 import AuthButton from '../authBtn';
@@ -34,7 +35,7 @@ const Login = () => {
           value={loginBody.password}
           setValue={setLoginBody}
           text='Введите пароль...'
-          type='password'
+          type='text'
         />
         <AuthButton text='Войти' />
       </LoginForm>
