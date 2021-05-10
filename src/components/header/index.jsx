@@ -3,6 +3,7 @@ import { HeaderWrapper, HeaderButton, HeaderContainer, LogoText, Logo } from './
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { userLogout } from '../../actions/userAction';
+import { searchFiles } from '../../actions/file';
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -13,6 +14,14 @@ const Header = () => {
       dispatch(userLogout());
     }
   };
+
+  const [searchName, setSearchName] = React.useState('')
+
+  const handleSearch = (event) => {
+    setSearchName(event.target.value)
+    dispatch(searchFiles(event.target.value))
+  }
+
   return (
     <HeaderWrapper>
       <HeaderContainer>
@@ -28,6 +37,9 @@ const Header = () => {
           <LogoText>MERN CLOUD</LogoText>
         </Logo>
         <div>
+          {isAuth && (
+            <input value={searchName} onChange={(e) => handleSearch(e)} name="search" type="text" placeholder="" />
+          )}
           {!isAuth && (
             <>
               <HeaderButton>

@@ -1,10 +1,12 @@
 import axios from 'axios';
+import { showLoader, hideLoader } from '../reducers/appReducer';
 import { setFiles, addFile, deleteFileAction } from '../reducers/fileReducer';
 import { addUploadFile, showUploadFile, changeUploadFile } from '../reducers/uploadReducer';
 
 export const getFiles = (dirId, sort) => {
   return async (dispatch) => {
     try {
+      dispatch(showLoader());
       let url = `http://localhost:8080/api/files`;
 
       if (dirId) {
@@ -26,6 +28,8 @@ export const getFiles = (dirId, sort) => {
       console.log(response.data);
     } catch (err) {
       console.log(err);
+    } finally {
+      dispatch(hideLoader());
     }
   };
 };
@@ -70,7 +74,7 @@ export const uploadFile = (file, dirId) => {
           const totalLength = progressEvent.lengthComputable
             ? progressEvent.total
             : progressEvent.target.getResponseHeader('content-length') ||
-              progressEvent.target.getResponseHeader('x-decompressed-content-length');
+            progressEvent.target.getResponseHeader('x-decompressed-content-length');
 
           if (totalLength) {
             uploadFile.progress = Math.round((progressEvent.loaded * 100) / totalLength);
@@ -119,6 +123,22 @@ export function deleteFile(file) {
       console.log(response);
       dispatch(deleteFileAction(file._id));
       console.log(response.data.message);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+}
+
+export function searchFiles(searchName) {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`http://localhost:8080/api/files/search?search=${searchName}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      });
+      console.log(response);
+      dispatch(setFiles(response.data));
     } catch (err) {
       console.log(err);
     }

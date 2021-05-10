@@ -13,6 +13,7 @@ import { setCurrentDir } from '../../reducers/fileReducer';
 import FileList from './fileList/fileList';
 import Popup from './popup';
 import Uploader from './uploader';
+import './loader.css';
 
 const Disk = () => {
   const dispatch = useDispatch();
@@ -22,6 +23,7 @@ const Disk = () => {
 
   const popupRef = React.useRef();
 
+  const { loader } = useSelector((state) => state.loader);
   const currentDir = useSelector((state) => state.files.currentDir);
   const dirStack = useSelector((state) => state.files.dirStack);
 
@@ -67,6 +69,19 @@ const Disk = () => {
     files.forEach((file) => dispatch(uploadFile(file, currentDir)));
     setDragEnter(false);
   };
+
+  if (loader) {
+    return (
+      <div class='loader-container'>
+        <div class="lds-facebook">
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+
+    );
+  }
 
   return !dragEnter ? (
     <DiskWrapper

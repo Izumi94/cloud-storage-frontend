@@ -33,3 +33,4 @@ export const DragEnter = styled.div`
   justify-content: center;
   font-size: 48px;
 `;
+
